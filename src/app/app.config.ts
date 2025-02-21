@@ -9,6 +9,7 @@ import { provideEffects } from '@ngrx/effects';
 import { AppEffects } from '../store/application/app.effects';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideStore({ appStore: appReducer }),
     provideEffects([AppEffects]),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideAnimationsAsync()
 ]
 };

@@ -5,15 +5,16 @@ import { Store } from "@ngrx/store";
 import { environment } from "../environments/environment";
 import { League } from "./models/league.model";
 import { selectLeagues } from "../store/application/app.selector";
-import { BehaviorSubject } from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  // leagues$: BehaviorSubject<League[]>([]);
-  leagues$;
+  leagues$: Observable<League[]>;
+  baseUri = environment.efEndpoint;
+
 
   constructor(
     private httpClient: HttpClient,
@@ -21,7 +22,7 @@ export class AppService {
   ) {
     this.leagues$ = this.store.select(selectLeagues);
   }
-  baseUri = environment.efEndpoint;
+
   fetchLeagues(limit: number, offest: number) {
     const params = new HttpParams()
     .set('limit', limit.toString())

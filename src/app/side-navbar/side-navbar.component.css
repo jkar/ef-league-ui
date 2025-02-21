@@ -1,0 +1,7 @@
+.side-navbar {
+  @apply flex flex-row md:flex-col h-20 md:h-full w-full bg-blue-400 px-2 py-5;
+
+  .router-link-active {
+    @apply bg-green-300;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="side-navbar">
+  <div class="header">Football Choices</div>
+  <div class="main-choices">
+    <ul>
+      @for (menuChoice of menuChoices; track menuChoice.title) {
+        <li>
+          <a [routerLink]="[menuChoice.link]"
+            routerLinkActive="router-link-active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            {{menuChoice.title}}
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</div>
+<!-- <p>siddebar</p> -->
