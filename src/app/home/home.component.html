@@ -1,1 +1,6 @@
 <p>home works!</p>
+<p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [circular]="true">
+  <ng-template let-image pTemplate="item">
+    <img [src]="image.src" alt="Slide" style="width: 100px; border-radius: 10px;">
+  </ng-template>
+</p-carousel>

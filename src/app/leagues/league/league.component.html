@@ -1,0 +1,8 @@
+
+<h3>{{league?.name}}</h3>
+<h5>{{league?.country}}</h5>
+<ul class="px-5">
+  @for (team of league?.teams; track team.name) {
+    <li>{{team.name}}</li>
+  }
+</ul>

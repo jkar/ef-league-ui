@@ -3,8 +3,9 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { AppState } from "./app.model";
 import { fetchLeaguesFailed, initFetchLeagues, setLeaguesSuccesful } from "./app.actions";
-import { catchError, map, switchMap } from "rxjs";
+import { catchError, exhaustMap, filter, map, switchMap, take, withLatestFrom } from "rxjs";
 import { AppService } from "../../app/app.service";
+import { selectLeagues } from "./app.selector";
 
 @Injectable()
 export class AppEffects {
@@ -20,7 +21,10 @@ export class AppEffects {
       {
       return this.actions$.pipe(
         ofType(initFetchLeagues),
-        switchMap((actions) => {
+        withLatestFrom(this.store.select(selectLeagues).pipe(take(1))),
+        filter(([actions, leagues]) => leagues.length == 0),
+        // switchMap(([actions, lgs]) => {
+          exhaustMap(([actions, lgs]) => {
             const { limit, offest, type } = actions;
             return this.appService.fetchLeagues(limit, offest).pipe(
               map( leagues => {
@@ -34,6 +38,8 @@ export class AppEffects {
             )
         })
       )
-    }, { dispatch: false });
+    },
+     { dispatch: false }
+    );
     }
 }

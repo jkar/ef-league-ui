@@ -1,1 +1,20 @@
-<p>leagues works!</p>
+@if (leagues$ | async; as leagues) {
+  <p-tabs value="0">
+    <p-tablist>
+        @for (league of leagues; track league.name) {
+            <p-tab [value]="league.name">{{ league.name }}</p-tab>
+        }
+    </p-tablist>
+    <p-tabpanels>
+        @for (league of leagues; track league.name) {
+            <p-tabpanel [value]="league.name">
+              <app-league [league]="league"></app-league>
+            </p-tabpanel>
+        }
+    </p-tabpanels>
+</p-tabs>
+
+} @else {
+  <p>loading leagues...</p>
+}
+

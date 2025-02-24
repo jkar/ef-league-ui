@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/application/app.model';
-import { initFetchLeagues } from '../store/application/app.actions';
 import { AppService } from './app.service';
 import { SideNavbarComponent } from './side-navbar/side-navbar.component';
 import { HeaderComponent } from './header/header.component';
@@ -24,9 +23,5 @@ export class AppComponent implements OnInit {
   {}
 
   ngOnInit(): void {
-    this.store.dispatch(initFetchLeagues({ limit: 5, offest: 0 }));
-    this.appService.leagues$.subscribe(leagues => {
-      console.log('leagues', leagues);
-    })
   }
 }
