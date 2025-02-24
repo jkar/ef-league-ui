@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
 })
 export class AppService {
 
-  leagues$: Observable<League[]>;
+  leagues$: Observable<League[] | null>;
   baseUri = environment.efEndpoint;
 
 

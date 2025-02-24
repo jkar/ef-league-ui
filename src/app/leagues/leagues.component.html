@@ -1,14 +1,18 @@
-@if (leagues$ | async; as leagues) {
-  <p-tabs value="0">
+@if (combined$ | async; as combined) {
+  <p-tabs (valueChange)="onChangeTab($event)" value="0">
     <p-tablist>
-        @for (league of leagues; track league.name) {
+        @for (league of combined.leagues; track league.name) {
             <p-tab [value]="league.name">{{ league.name }}</p-tab>
         }
     </p-tablist>
     <p-tabpanels>
-        @for (league of leagues; track league.name) {
+        @for (league of combined.leagues; track league.name) {
             <p-tabpanel [value]="league.name">
-              <app-league [league]="league"></app-league>
+              <app-league [league]="league" (selectTeamName)="onSelectTeamName($event)"></app-league>
+              @if (combined.team) {
+                <h2>{{combined.team.name}}</h2>
+                <p>{{combined.team.coachName}}</p>
+              }
             </p-tabpanel>
         }
     </p-tabpanels>

@@ -8,7 +8,7 @@ export interface AppState {
   User: User | null,
   loading: boolean,
   error: string | null,
-  leagues: League[],
+  leagues: League[] | null,
   teams: Team[],
   // referees: Referee[],
   players: Player[],

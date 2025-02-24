@@ -4,6 +4,7 @@ import { Player } from "./player.model";
 export interface Team {
   id: string,
   name: string,
-  coach: Coach,
+  // coachName: Coach,
+  coachName: string,
   players: Player[]
 }

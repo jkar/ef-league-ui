@@ -6,7 +6,7 @@ const initialState: AppState = {
     User: null,
     loading: false,
     error: null,
-    leagues: [],
+    leagues: null,
     teams: [],
     // referees: Referee[],
     players: [],

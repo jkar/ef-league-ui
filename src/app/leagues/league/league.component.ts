@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { League } from '../../models/league.model';
 
 @Component({
@@ -9,4 +9,9 @@ import { League } from '../../models/league.model';
 })
 export class LeagueComponent {
   @Input() league: League | undefined;
+  @Output() selectTeamName = new EventEmitter<string | null>();
+
+  onSelectTeamName (name: string | null) {
+    this.selectTeamName.emit(name);
+  }
 }
