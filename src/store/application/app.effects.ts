@@ -21,7 +21,7 @@ export class AppEffects {
       {
       return this.actions$.pipe(
         ofType(initFetchLeagues),
-        withLatestFrom(this.store.select(selectLeagues).pipe(take(1))),
+        withLatestFrom(this.store.select(selectLeagues)),
         filter(([actions, leagues]) =>  !leagues || leagues?.length == 0),
         // switchMap(([actions, lgs]) => {
           exhaustMap(([actions, lgs]) => {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TabsModule } from 'primeng/tabs';
 import { AppState } from '../../store/application/app.model';
@@ -16,11 +16,11 @@ import { Team } from '../models/team.model';
   templateUrl: './leagues.component.html',
   styleUrl: './leagues.component.css'
 })
-export class LeaguesComponent {
+export class LeaguesComponent implements OnDestroy {
 
   subscriptionArray: Subscription[] = [];
   leagues$: Observable<League[] | null>;
-  selectedTeamName$ = new BehaviorSubject<string | null>('no team');
+  selectedTeamName$ = new BehaviorSubject<string | null>(null);
   changeTab$ = new BehaviorSubject<string | number | null>(null);
   combined$ : Observable<{
     leagues: League[] | null,
@@ -55,6 +55,11 @@ export class LeaguesComponent {
         return { leagues, selectedTeamName, team }
       })
     )
+  }
+  ngOnDestroy(): void {
+    if (this.subscriptionArray.length>0) {
+      this.subscriptionArray.forEach(subscription => subscription.unsubscribe());
+    }
   }
 
   ngOnInit(): void {
