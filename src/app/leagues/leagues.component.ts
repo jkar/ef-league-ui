@@ -4,7 +4,7 @@ import { TabsModule } from 'primeng/tabs';
 import { AppState } from '../../store/application/app.model';
 import { AppService } from '../app.service';
 import { initFetchLeagues } from '../../store/application/app.actions';
-import { BehaviorSubject, combineLatest, map, Observable, pairwise, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, map, Observable, pairwise, Subscription } from 'rxjs';
 import { League } from '../models/league.model';
 import { AsyncPipe } from '@angular/common';
 import { LeagueComponent } from './league/league.component';
@@ -38,6 +38,7 @@ export class LeaguesComponent implements OnDestroy {
       this.leagues$,
       this.selectedTeamName$
     ]).pipe(
+      filter(([leagues, selectedTeamName]) => (leagues != undefined || leagues != null ) && leagues?.length > 0),
       map(([leagues, selectedTeamName]) => {
         let team: Team | null = null;
         if (leagues && leagues.length> 0 && selectedTeamName){
@@ -69,8 +70,6 @@ export class LeaguesComponent implements OnDestroy {
         pairwise()
       )
       .subscribe(([ oldValue, newValue]) => {
-        console.log('old',oldValue)
-        console.log('new', newValue)
         if (newValue && oldValue != newValue ) {
           this.selectedTeamName$.next(null);
         }

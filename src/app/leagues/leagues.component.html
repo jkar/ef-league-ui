@@ -1,5 +1,5 @@
 @if (combined$ | async; as combined) {
-  @if (combined.leagues && combined.leagues.length > 0) {
+  <!-- @if (combined.leagues && combined.leagues.length > 0) { -->
     <p-tabs (valueChange)="onChangeTab($event)" value="0">
       <p-tablist>
           @for (league of combined.leagues; track league.name) {
@@ -21,6 +21,6 @@
   } @else {
     <p>...loading</p>
   }
-}
+<!-- } -->
 
 
